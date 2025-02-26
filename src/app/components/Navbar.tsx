@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, Box } from "@mui/material";
 import { Menu, Moon, Sun } from "lucide-react"; // Lucide icons for lightweight icons
+import { Outfit } from "next/font/google"; // ✅ Import at the top (Fixes error)
+
+// ✅ Load Outfit Font
+const outfit = Outfit({ subsets: ["latin"], weight: ["400"] });
 
 const Navbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,6 +22,11 @@ const Navbar: React.FC = () => {
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    document.documentElement.style.overflowX = "hidden";
+    document.body.style.overflowX = "hidden";
+  }, []);
 
   return (
     <>
@@ -41,16 +50,21 @@ const Navbar: React.FC = () => {
             </IconButton>
 
             {/* Logo */}
-            <Link href="/" passHref>
-              <img src="/icon.png" alt="Business Boost Society" width={78} height={60} style={{ cursor: "pointer" }} />
-            </Link>
+            <Box sx={{ ml: 2 }}>
+              <Link href="/" passHref>
+                <img src="/icon.png" alt="Business Boost Society" width={80} height={62} style={{ cursor: "pointer" }} />
+              </Link>
+            </Box>
           </Box>
 
           {/* Right Section */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 2 }}>
+          <Box sx={{ fontWeight: "400", display: { xs: "none", md: "flex" }, alignItems: "center"}}>
             <NavButton href="/about" label="About Us" />
+            <NavSeparator />
             <NavButton href="/cohort" label="Cohort" />
+            <NavSeparator />
             <NavButton href="/accelerator" label="Accelerator" />
+            <NavSeparator />
             <NavButton href="/contact" label="Contact Us" />
 
             <Button component={Link} href="/signup" sx={{ fontWeight: "bold", color: "black", textTransform: "none" }}>
@@ -104,9 +118,18 @@ const Navbar: React.FC = () => {
   );
 };
 
-// ✅ Desktop Navigation Button
+// ✅ Desktop Navigation Button with Outfit Font
 const NavButton: React.FC<{ href: string; label: string }> = ({ href, label }) => (
-  <Button component={Link} href={href} sx={{ color: "black", textTransform: "none", fontWeight: 500 }}>
+  <Button
+    component={Link}
+    href={href}
+    sx={{
+      color: "black",
+      textTransform: "none",
+      fontWeight: "bold",
+      fontFamily: outfit.style.fontFamily, // ✅ Correct font usage
+    }}
+  >
     {label}
   </Button>
 );
@@ -118,6 +141,11 @@ const NavListItem: React.FC<{ href: string; label: string }> = ({ href, label })
       <ListItemText primary={label} />
     </ListItemButton>
   </ListItem>
+);
+
+// ✅ Separator for Navbar Links
+const NavSeparator: React.FC = () => (
+  <img src="/Line 317.svg" alt="Separator Icon" style={{ width: "20px", height: "20px" }} />
 );
 
 export default Navbar;

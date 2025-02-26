@@ -51,11 +51,11 @@ const CollaborativePartners: React.FC = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", width: "93%", mx: "auto", py: 5, overflow: "hidden" }}>
-      <Box sx={{ textAlign: "center", maxWidth: "800px", mx: "auto" }}>
-        <Typography variant="h4" sx={{ fontWeight: 600, fontSize: { xs: "1.5em", sm: "2.5em" } }}>
+      <Box sx={{ textAlign: "center", maxWidth: "75vw", mx: "auto" }}>
+        <Typography variant="h4" sx={{ fontFamily:"Outfit",fontWeight: 600, fontSize: { xs: "1.5em", sm: "2.5em" } }}>
         Collaborative Partners
         </Typography>
-        <Typography variant="body1" sx={{ fontSize: { xs: "16px", sm: "18px" }, textAlign: "center", mt: 1 }}>
+        <Typography variant="body1" sx={{ color:"rgba(63, 60, 60, 0.87)",fontFamily:"Outfit",fontWeight:"400",fontSize: { xs: "16px", sm: "18px" }, textAlign: "center", mt: 1 }}>
         Business Boost! Society is proud to collaborate with industry-leading partners who share our vision for innovation and excellence. These strategic partnerships allow us to combine our expertise and resources to deliver exceptional solutions to our clients. Here are some of our valued collaborative partners.
         </Typography>
       </Box>
@@ -79,7 +79,7 @@ const CollaborativePartners: React.FC = () => {
 
         <Box sx={{ display: "flex", flexWrap: "nowrap", gap: 2, transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`, transition: "transform 0.5s ease-in-out" }}>
           {partners.map((partner, index) => (
-            <Card key={index} sx={{ width: isMobile ? "90%" : "30%", flexShrink: 0, p: 2, borderRadius: "12px" }}>
+            <Card key={index} sx={{ width: isMobile ? "90%" : "28%", flexShrink: 0, p: 2, borderRadius: "12px" }}>
               <CardMedia component="img" image={partner.img} alt={partner.name} sx={{ height: "80px", objectFit: "contain" }} />
               <CardContent>
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>{partner.name}</Typography>
